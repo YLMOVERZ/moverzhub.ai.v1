@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Moverzhub.AI - Your free AI-powered moving assistant. Get instant quotes, compare moving companies, find the best neighborhoods, and create custom moving checklists. Expert advice on relocation costs, school districts, and local insights. Start planning your stress-free move today with our intelligent relocation tools.">
+    <meta name="keywords" content="AI moving assistant, free moving cost calculator, relocation planner, moving company comparison, neighborhood finder, school district ratings, moving checklist generator, cost of living calculator, local area insights, moving quotes, relocation services, moving help, best places to live, moving tips, relocation guide">
+    <meta name="author" content="Moverzhub.AI">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Moverzhub.AI - Free AI Moving Assistant | Instant Relocation Planning">
+    <meta property="og:description" content="Plan your perfect move with AI-powered relocation assistance. Get instant quotes, neighborhood insights, and custom moving checklists.">
+    <meta property="og:image" content="https://moverzhub.ai/images/moverzhub-social.jpg">
+    <meta property="og:url" content="https://moverzhub.ai">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://moverzhub.ai" />
+    <title>Free AI Moving Assistant | Moving Cost Calculator | Relocation Planner | Moverzhub.AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;        /* Bright blue */
+            --secondary-color: #3b82f6;      /* Lighter blue */
+            --accent-color: #0284c7;         /* Sky blue */
+            --background-light: #f0f7ff;     /* Very light blue */
+            --background-dark: #1e293b;      /* Dark blue-gray */
+            --text-primary: #1e293b;         /* Dark blue-gray */
+            --text-secondary: #64748b;       /* Medium gray */
+            --success-color: #22c55e;        /* Green */
+            --warning-color: #eab308;        /* Yellow */
+            --error-color: #ef4444;          /* Red */
+            --gradient-bg: linear-gradient(135deg, #f0f7ff 0%, #e0eeff 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--gradient-bg);
+        }
+
+        .hero-section {
+            min-height: 85vh;
+            background: url('images/relocation-bg.jpg') center/cover no-repeat;
+            position: relative;
+        }
+
+        .min-vh-75 {
+            min-height: 75vh;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .moving-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 30%);
+            animation: moveShapes 20s linear infinite;
+        }
+
+        @keyframes moveShapes {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        .hero-stats .stat-item {
+            padding: 0.5rem 1rem;
+            border-left: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .hero-stats h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .text-light-50 {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Add animation classes */
+        .animate__animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        .animate__fadeInUp {
+            animation-name: fadeInUp;
+        }
+
+        .animate__fadeInRight {
+            animation-name: fadeInRight;
+        }
+
+        .animate__delay-1s {
+            animation-delay: 0.2s;
+        }
+
+        .animate__delay-2s {
+            animation-delay: 0.4s;
+        }
+
+        .animate__delay-3s {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translate3d(40px, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+            .hero-section {
+                min-height: auto;
+                padding: 4rem 0;
+            }
+            
+            .min-vh-75 {
+                min-height: auto;
+            }
+        }
+
+        .ai-chat-container {
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin-top: -50px;
+        }
+
+        .feature-card {
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cta-section {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-bar {
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .stats-bar .h4 {
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        @keyframes textPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .text-pulse {
+            animation: textPulse 0.5s ease-in-out;
+            display: inline-block;
+        }
+
+        .chat-message {
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+
+        .you-message {
+            background-color: #f1f5f9;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .reloai-message {
+            background-color: #eff6ff;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .typing-indicator {
+            padding: 10px;
+            margin-left: 20px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #90a4ae;
+            border-radius: 50%;
+            animation: typing 1s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: 0.1s; }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chat-container-wrapper {
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .chat-message {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .chat-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .character-count {
+            position: absolute;
+            right: 100px;
+            bottom: -20px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .suggestions-container {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-chip {
+            background-color: #eff6ff;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+
+        .suggestion-chip:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .process-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .process-icon {
+            position: relative;
+            display: inline-block;
+        }
+
+        .process-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--accent-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Active nav link style */
+        .nav-link.active {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+
+        .pricing-card {
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .price-tag {
+            color: var(--primary-color);
+        }
+
+        .price-tag .currency {
+            font-size: 1.5rem;
+            vertical-align: top;
+            margin-right: 4px;
+        }
+
+        .price-tag .amount {
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+
+        .price-tag .period {
+            font-size: 1rem;
+            color: #6b7280;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.75rem;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Add smooth scrolling for section navigation */
+        html {
+            scroll-padding-top: 80px; /* Adjust based on your navbar height */
+        }
+
+        /* Section transitions */
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+
+        .about-card i {
+            font-size: 2rem;
+            display: block;
+        }
+
+        #about-us img {
+            transition: transform 0.3s ease;
+        }
+
+        #about-us img:hover {
+            transform: scale(1.02);
+        }
+
+        .section-navigator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 10px 5px;
+        }
+
+        .section-nav-item {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            margin: 5px;
+        }
+
+        .section-nav-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .section-nav-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .section-nav-item i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .section-nav-item span {
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .section-navigator:hover .section-nav-item span {
+            opacity: 1;
+            width: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .section-navigator {
+                display: none;
+            }
+        }
+
+        /* Update navbar styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Update chat container styling */
+        .ai-chat-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Update chat message styling */
+        .you-message {
+            background-color: #f1f5f9;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .reloai-message {
+            background-color: #eff6ff;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        /* Update features section */
+        #features {
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Update How It Works section */
+        #how-it-works {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0eeff 100%);
+        }
+
+        .process-card {
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        /* Update About Us section */
+        #about-us {
+            background: linear-gradient(135deg, #e0eeff 0%, #f8fafc 100%);
+        }
+
+        .about-card {
+            background: white;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        /* Update CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
+                        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
+            background-size: 20px 20px;
+            opacity: 0.1;
+        }
+
+        /* Update footer */
+        footer {
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--primary-color) 100%);
+        }
+
+        /* Update buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            box-shadow: 0 2px 4px rgba(26, 54, 93, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Update suggestion chips */
+        .suggestion-chip {
+            background-color: #eff6ff;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+
+        .suggestion-chip:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Update stats bar */
+        .stats-bar {
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        /* Update section navigator */
+        .section-navigator {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .section-nav-item:hover, .section-nav-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Update text colors */
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        /* Update process cards */
+        .process-icon i {
+            color: var(--primary-color);
+        }
+
+        /* Update about cards */
+        .about-card i {
+            color: var(--primary-color);
+        }
+
+        /* Update navbar */
+        .navbar-light .navbar-nav .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Update footer */
+        footer {
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--primary-color) 100%);
+        }
+
+        .chat-box-container, .action-box {
+            height: 100%;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .chat-box-container:hover, .action-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        }
+
+        .stat-item {
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .stat-item i {
+            font-size: 1.5rem;
+        }
+
+        .rounded-lg {
+            border-radius: 1rem !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        }
+
+        /* Add these responsive styles */
+        @media (max-width: 1200px) {
+            .hero-section {
+                min-height: 70vh;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-section {
+                min-height: auto;
+                padding: 4rem 0;
+            }
+            
+            .min-vh-75 {
+                min-height: auto;
+            }
+            
+            .hero-stats .stat-item {
+                width: 100%;
+                margin-bottom: 1rem;
+                text-align: center;
+                border-left: none;
+                border-bottom: 3px solid rgba(255,255,255,0.2);
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+            
+            .lead {
+                font-size: 1.1rem;
+            }
+            
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero-section {
+                padding: 3rem 0;
+            }
+            
+            .display-4 {
+                font-size: 2rem;
+            }
+            
+            .d-flex.gap-3 {
+                flex-direction: column;
+                gap: 1rem !important;
+            }
+            
+            .btn-lg {
+                width: 100%;
+            }
+        }
+
+        /* Add preload for hero image */
+        .hero-section {
+            background-image: linear-gradient(rgba(37, 99, 235, 0.95), rgba(2, 132, 199, 0.90)),
+                            url('images/relocation-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Add loading state for illustration */
+        .hero-illustration {
+            position: relative;
+        }
+
+        .hero-illustration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+            background-size: 200% 200%;
+            animation: loading 1.5s infinite;
+            border-radius: 0.5rem;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .hero-illustration.loaded::before {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/openai@4.0.0/dist/openai.min.js"></script>
+    <script>
+        // Initialize OpenAI with API key
+        let openai = null;
+        
+        async function initializeOpenAI() {
+            try {
+                // Check if we're in development or production
+                const isProduction = window.location.hostname !== 'localhost';
+                
+                // In production, fetch the key from your secure backend
+                if (isProduction) {
+                    const response = await fetch('/api/get-openai-key');
+                    const { apiKey } = await response.json();
+                    openai = new OpenAI({
+                        apiKey: apiKey,
+                        dangerouslyAllowBrowser: true
+                    });
+                } else {
+                    // For development only
+                    openai = new OpenAI({
+                        apiKey: 'your-development-key-here',
+                        dangerouslyAllowBrowser: true
+                    });
+                }
+            } catch (error) {
+                console.warn('OpenAI initialization failed:', error);
+                // Don't throw error, just log it and continue
+                // The chat interface will handle the null openai instance
+            }
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', initializeOpenAI);
+
+        class ChatInterface {
+            constructor() {
+                this.messagesContainer = document.querySelector('.chat-messages');
+                this.input = document.querySelector('.input-group input');
+                this.sendButton = document.querySelector('.input-group button');
+                this.questionsCounter = document.getElementById('questions-counter');
+                this.questionsAnswered = 124567;
+                this.loadingOverlay = document.getElementById('loading-overlay');
+                this.errorMessage = document.getElementById('error-message');
+                this.errorText = document.getElementById('error-text');
+                this.setupSuggestions();
+                this.maxLength = 200;
+                this.setupCharacterCount();
+                
+                this.setupEventListeners();
+                this.showWelcomeMessage();
+                
+                this.systemPrompt = `You are ReloAI, a friendly and knowledgeable relocation assistant with a warm, conversational tone.
+
+Your primary goal is to gather essential information while providing helpful advice. Always maintain context from previous messages in the conversation.
+
+Key Information to Gather (if not provided):
+- Current location
+- Desired destination
+- Household composition (single, family, pets)
+- Timeline for move
+- Budget considerations
+- Priority factors (schools, safety, commute, etc.)
+- Housing preferences (rent/buy, house/apartment)
+- Lifestyle preferences (urban/suburban/rural)
+
+Conversation Guidelines:
+- Start by acknowledging any information they've already shared
+- Ask 1-2 relevant follow-up questions with each response
+- Provide specific, actionable insights based on information gathered
+- Use a friendly, empathetic tone
+- Include occasional emojis to keep the tone warm
+- Break down complex information into bullet points
+- Focus on their specific needs and circumstances
+
+Example follow-up questions:
+- "What's your budget range for housing?"
+- "Are good schools a priority for your family?"
+- "Do you prefer an urban or suburban environment?"
+- "How important is public transportation access?"
+- "What kind of commute time are you comfortable with?"
+
+Your expertise includes:
+- Cost of living comparisons
+- Neighborhood recommendations
+- School district information
+- Moving cost estimates
+- Local amenities and culture
+- Housing market insights
+- Job market information
+
+Always aim to build a complete picture of their needs while providing helpful information along the way.`;
+            }
+
+            setupEventListeners() {
+                this.sendButton.addEventListener('click', () => this.handleUserMessage());
+                this.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.handleUserMessage();
+                    }
+                });
+            }
+
+            setupSuggestions() {
+                document.querySelectorAll('.suggestion-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        this.input.value = chip.textContent;
+                        this.handleUserMessage();
+                    });
+                });
+            }
+
+            setupCharacterCount() {
+                const countSpan = document.createElement('span');
+                countSpan.className = 'character-count';
+                this.input.parentElement.appendChild(countSpan);
+
+                this.input.addEventListener('input', () => {
+                    const remaining = this.maxLength - this.input.value.length;
+                    countSpan.textContent = `${remaining} characters remaining`;
+                });
+            }
+
+            showLoading() {
+                this.loadingOverlay.style.display = 'flex';
+            }
+
+            hideLoading() {
+                this.loadingOverlay.style.display = 'none';
+            }
+
+            showError(message) {
+                this.errorText.textContent = message;
+                this.errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    this.errorMessage.style.display = 'none';
+                }, 5000);
+            }
+
+            async handleUserMessage() {
+                const message = this.input.value.trim();
+                
+                // Input validation
+                if (!message) {
+                    this.showError('Please enter a message');
+                    return;
+                }
+                
+                if (message.length > this.maxLength) {
+                    this.showError(`Message too long. Maximum ${this.maxLength} characters allowed.`);
+                    return;
+                }
+
+                console.log("Sending message:", message);
+                
+                this.input.value = '';
+                this.appendMessage('You', message);
+                
+                this.showLoading();
+                this.errorMessage.style.display = 'none';
+
+                try {
+                    const response = await this.getAIResponse(message);
+                    console.log("AI Response:", response);
+                    this.appendMessage('ReloAI', response);
+                    this.updateCounter();
+                } catch (error) {
+                    console.error('Chat Error:', error);
+                    this.showError(error.message);
+                } finally {
+                    this.hideLoading();
+                }
+            }
+
+            async getAIResponse(message) {
+                try {
+                    if (!openai) {
+                        // If OpenAI isn't initialized, use a fallback response
+                        return "I apologize, but I'm currently unable to connect to our AI service. Please try refreshing the page or contact support if the issue persists.";
+                    }
+
+                    const completion = await openai.chat.completions.create({
+                        model: "gpt-3.5-turbo",
+                        messages: [
+                            { role: "system", content: this.systemPrompt },
+                            { role: "user", content: message }
+                        ],
+                        temperature: 0.8,
+                        max_tokens: 250
+                    });
+
+                    if (!completion?.choices?.[0]?.message?.content) {
+                        throw new Error('Invalid API response');
+                    }
+
+                    return completion.choices[0].message.content;
+
+                } catch (error) {
+                    console.error('API Error:', error);
+                    
+                    // More user-friendly error messages
+                    if (error.message.includes('API key')) {
+                        return "I'm currently experiencing authentication issues. Please try again later or contact support.";
+                    } else if (error.status === 429) {
+                        return "I'm receiving too many requests right now. Please wait a moment and try again.";
+                    } else if (error.status === 401) {
+                        return "I'm having trouble accessing the AI service. Please try again later.";
+                    } else {
+                        return "I apologize, but I'm having trouble processing your request. Please try again.";
+                    }
+                }
+            }
+
+            appendMessage(sender, message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `mb-2 chat-message ${sender.toLowerCase()}-message`;
+                messageDiv.innerHTML = `
+                    <strong>${sender}:</strong> ${message}
+                `;
+                this.messagesContainer.appendChild(messageDiv);
+                
+                setTimeout(() => {
+                    messageDiv.classList.add('show');
+                }, 10);
+
+                this.scrollToBottom();
+            }
+
+            appendTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'typing-indicator mb-2';
+                typingDiv.innerHTML = `
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                `;
+                this.messagesContainer.appendChild(typingDiv);
+                this.scrollToBottom();
+                return typingDiv;
+            }
+
+            scrollToBottom() {
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+
+            updateCounter() {
+                this.questionsAnswered++;
+                this.questionsCounter.textContent = this.questionsAnswered.toLocaleString();
+                this.questionsCounter.classList.add('text-pulse');
+                setTimeout(() => {
+                    this.questionsCounter.classList.remove('text-pulse');
+                }, 1000);
+            }
+
+            showWelcomeMessage() {
+                setTimeout(() => {
+                    this.appendMessage('ReloAI', 
+                        'Hello! I\'m your AI relocation assistant. To help you better with your move, I\'d love to learn a bit about your situation.\n\n' +
+                        'Could you tell me:\n' +
+                        '• Where are you planning to move from?\n' +
+                        '• Do you have a specific destination in mind?\n' +
+                        '• Are you moving alone, with family, or with pets?\n' +
+                        '• What\'s your preferred timeline for the move?\n' +
+                        '• What\'s most important to you in your new location? (e.g., schools, safety, nightlife, etc.)\n\n' +
+                        'Feel free to answer any of these questions, and I\'ll help customize your relocation plan! 🏠✨'
+                    );
+                }, 500);
+            }
+        }
+
+        // Initialize chat interface when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChatInterface();
+
+            // Get all sections and nav links
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Handle navigation active state
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    if (section.id) {  // Only check sections with IDs
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+                        if (pageYOffset >= sectionTop - 60) {
+                            current = section.getAttribute('id');
+                        }
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Intersection Observer for section animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Section navigator functionality
+            const sectionNav = document.querySelector('.section-navigator');
+            const sectionNavItems = document.querySelectorAll('.section-nav-item');
+
+            // Update active section in nav
+            const updateSectionNav = () => {
+                const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        sectionNavItems.forEach(item => {
+                            item.classList.remove('active');
+                            if (item.dataset.target === sectionId) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            };
+
+            // Add click handlers to nav items
+            sectionNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.dataset.target;
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Update active section on scroll
+            window.addEventListener('scroll', updateSectionNav);
+            
+            // Initial update
+            updateSectionNav();
+        });
+
+        // Add this to your existing scripts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle illustration loading
+            const illustration = document.querySelector('.hero-illustration img');
+            if (illustration) {
+                illustration.onload = function() {
+                    illustration.parentElement.classList.add('loaded');
+                };
+            }
+
+            // Test if Font Awesome is loaded
+            const testIcon = document.createElement('i');
+            testIcon.className = 'fas fa-robot';
+            if (testIcon.offsetWidth === 0) {
+                console.warn('Font Awesome not loaded properly');
+                // Fallback to alternative icon font or reload
+                loadFallbackIcons();
+            }
+        });
+
+        function loadFallbackIcons() {
+            const fallbackLink = document.createElement('link');
+            fallbackLink.rel = 'stylesheet';
+            fallbackLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            document.head.appendChild(fallbackLink);
+        }
+    </script>
+    <link rel="preload" as="image" href="images/relocation-bg.jpg">
+    <link rel="preload" as="image" href="images/moving-illustration.svg">
+</head>
+<body>
+    <!-- Add this right after the opening <body> tag, before the navbar -->
+    <div class="section-navigator">
+        <div class="section-nav-content">
+            <div class="section-nav-item" data-target="chat">
+                <i class="fas fa-comments"></i>
+                <span>Chat</span>
+            </div>
+            <div class="section-nav-item" data-target="how-it-works">
+                <i class="fas fa-info-circle"></i>
+                <span>How It Works</span>
+            </div>
+            <div class="section-nav-item" data-target="features">
+                <i class="fas fa-star"></i>
+                <span>Features</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">Moverzhub.AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI Chat Section -->
+    <section id="chat" class="container my-5">
+        <div class="ai-chat-container">
+            <div class="error-message" id="error-message">
+                <strong>Error:</strong> <span id="error-text"></span>
+            </div>
+
+            <div class="overlay" id="loading-overlay">
+                <div class="spinner"></div>
+            </div>
+
+            <div class="chat-header text-center mb-4">
+                <h1 class="display-4 fw-bold mb-3">Your First Stop For All Your Relocation Needs</h1>
+                <p class="lead mb-4">Get instant, personalized answers to all your moving questions. Powered by AI to make your relocation journey smooth and stress-free.</p>
+            </div>
+            <div class="chat-interface">
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="chat-box-container p-4 bg-white rounded-lg shadow-sm">
+                            <div class="mb-4">
+                                <h4 class="text-primary d-flex align-items-center">
+                                    <i class="fas fa-robot me-2"></i>
+                                    Ask Betty: Your AI Relocation Expert
+                                </h4>
+                            </div>
+                            <div class="chat-messages p-3 mb-3" 
+                                 style="height: 300px; 
+                                        overflow-y: auto; 
+                                        border: 1px solid rgba(37, 99, 235, 0.1); 
+                                        border-radius: 12px; 
+                                        background: rgba(249, 250, 251, 0.5);">
+                                <!-- Chat messages will appear here -->
+                            </div>
+                            <div class="input-group">
+                                <input type="text" 
+                                       class="form-control form-control-lg border-2" 
+                                       placeholder="Ask Betty anything about your move..."
+                                       style="border-radius: 8px 0 0 8px;">
+                                <button class="btn btn-primary px-4" 
+                                        style="border-radius: 0 8px 8px 0;">
+                                    <i class="fas fa-paper-plane me-2"></i>
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="action-box p-4 bg-white rounded-lg shadow-sm text-center">
+                            <div class="mb-4">
+                                <i class="fas fa-home fa-3x text-primary mb-3"></i>
+                                <h4 class="mb-3">Ready to Move?</h4>
+                                <p class="text-muted mb-4">Let's create your personalized moving plan today!</p>
+                            </div>
+                            <a href="StartPlanningYourMove.html" class="btn btn-primary btn-lg w-100 py-3">
+                                <i class="fas fa-arrow-right me-2"></i>
+                                Start Planning Your Move
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Bar -->
+                <div class="stats-bar rounded-lg bg-white shadow-sm p-4 mt-4">
+                    <div class="row text-center g-3">
+                        <div class="col-md-4">
+                            <div class="stat-item">
+                                <i class="fas fa-comments text-primary mb-2"></i>
+                                <span class="h4 mb-0 text-primary d-block" id="questions-counter">124,567</span>
+                                <p class="text-muted mb-0">Questions Answered</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-item">
+                                <i class="fas fa-truck text-primary mb-2"></i>
+                                <span class="h4 mb-0 text-primary d-block">15,890</span>
+                                <p class="text-muted mb-0">Successful Moves</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-item">
+                                <i class="fas fa-star text-primary mb-2"></i>
+                                <span class="h4 mb-0 text-primary d-block">98%</span>
+                                <p class="text-muted mb-0">Satisfaction Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="suggestions-container mt-3">
+                <div class="suggestion-chip">Cost of living in New York</div>
+                <div class="suggestion-chip">Best neighborhoods for families</div>
+                <div class="suggestion-chip">Moving cost calculator</div>
+                <div class="suggestion-chip">School ratings comparison</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add this section after the AI Chat Section and before the Features Section -->
+    <section id="how-it-works" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">How Moverzhub.AI Works</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center process-card">
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-comments fa-3x text-primary"></i>
+                            <span class="process-number">1</span>
+                        </div>
+                        <h3 class="h5">Ask Your Question</h3>
+                        <p>Simply type your relocation questions into our AI chat interface. Ask about anything from cost of living to school districts.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center process-card">
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-brain fa-3x text-primary"></i>
+                            <span class="process-number">2</span>
+                        </div>
+                        <h3 class="h5">AI Analysis</h3>
+                        <p>Our advanced AI processes your question using real-time data and extensive relocation knowledge to generate accurate answers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center process-card">
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-chart-bar fa-3x text-primary"></i>
+                            <span class="process-number">3</span>
+                        </div>
+                        <h3 class="h5">Get Instant Insights</h3>
+                        <p>Receive detailed, personalized responses with actionable insights and data-driven recommendations.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center process-card">
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-check-circle fa-3x text-primary"></i>
+                            <span class="process-number">4</span>
+                        </div>
+                        <h3 class="h5">Make Informed Decisions</h3>
+                        <p>Use our AI-powered insights to make confident decisions about your relocation journey.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Information -->
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title"><i class="fas fa-database text-primary me-2"></i>Data Sources</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Real estate market data</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Cost of living indices</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>School ratings and reviews</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Crime statistics</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Local amenities information</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title"><i class="fas fa-shield-alt text-primary me-2"></i>Our Commitment</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Real-time, accurate information</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Personalized recommendations</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Privacy protection</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>24/7 AI assistance</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Regular data updates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose Moverzhub.AI?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card bg-white">
+                        <i class="fas fa-robot fa-2x mb-3 text-primary"></i>
+                        <h3>AI-Powered Insights</h3>
+                        <p>Get instant, accurate answers to all your relocation questions 24/7.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>Real-time responses</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Personalized recommendations</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Smart learning system</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card bg-white">
+                        <i class="fas fa-map-marked-alt fa-2x mb-3 text-primary"></i>
+                        <h3>Location Analysis</h3>
+                        <p>Detailed insights about neighborhoods, schools, and amenities.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>School ratings & reviews</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Crime rate statistics</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Local amenities mapping</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card bg-white">
+                        <i class="fas fa-calculator fa-2x mb-3 text-primary"></i>
+                        <h3>Cost Calculator</h3>
+                        <p>Accurate moving cost estimates and cost of living comparisons.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>Moving cost breakdown</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Living cost comparison</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Budget planning tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Features Row -->
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="feature-card bg-white">
+                        <i class="fas fa-truck fa-2x mb-3 text-primary"></i>
+                        <h3>Moving Services</h3>
+                        <p>Connect with verified moving companies and get instant quotes.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>Verified movers network</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Instant price quotes</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Service comparison tools</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card bg-white">
+                        <i class="fas fa-clipboard-list fa-2x mb-3 text-primary"></i>
+                        <h3>Moving Checklist</h3>
+                        <p>Customized moving timelines and task management tools.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>Personalized timeline</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Task reminders</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Progress tracking</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card bg-white">
+                        <i class="fas fa-home fa-2x mb-3 text-primary"></i>
+                        <h3>Housing Assistance</h3>
+                        <p>Find your perfect home with our smart housing recommendations.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success me-2"></i>Property listings</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Neighborhood guides</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Market analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Summary -->
+            <div class="text-center mt-5">
+                <p class="lead">Experience the future of relocation with our comprehensive suite of AI-powered tools and services.</p>
+                <a href="StartPlanningYourMove.html" class="btn btn-primary btn-lg mt-3">
+                    <i class="fas fa-comments me-2"></i>Start Planning Your Move
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Moverzhub.AI</h3>
+                    <p>Moverzhub.AI is owned and operated by Your Local Moverz LLC. Our mission is to make relocation simple with AI assistance.<br>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Resources</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="/moving-guides">Moving Guides</a></li>
+                        <li><a href="/relocation-tips">Relocation Tips</a></li>
+                        <li><a href="/cost-calculator">Cost Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3>Company</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="AboutUs.html">About Us</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3>Contact</h3>
+                    <address>
+                        Email: <a href="mailto:contact@moverzhub.ai">contact@moverzhub.ai</a><br>
+                        Phone: <a href="tel:+18883133639">(888) 313-3639</a><br>
+                        <div class="mt-2">
+                            <a href="https://facebook.com/moverzhub" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="https://twitter.com/moverzhub" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://linkedin.com/company/moverzhub" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

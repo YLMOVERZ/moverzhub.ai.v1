@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoveSmart | Intelligent Moving Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            max-width: 800px;
+            margin: -4rem auto 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            padding: 2rem 2rem 0;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border);
+            z-index: 1;
+        }
+
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .progress-step:hover {
+            transform: translateY(-2px);
+        }
+
+        .progress-step.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .progress-step.disabled:hover {
+            transform: none;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .progress-step.active .step-circle {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .progress-step.completed .step-circle {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        /* Form Steps */
+        .step {
+            display: none;
+            padding: 2rem;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step-header {
+            margin-bottom: 2rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: var(--text-light);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--background);
+        }
+
+        /* Help Section */
+        .help-section {
+            text-align: center;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .help-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .help-phone {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .distance-result {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .distance-result .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+
+        .distance-result .note {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .move-details {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .details-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .detail-value {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .detail-note {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .cost-breakdown {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: var(--text);
+        }
+
+        .cost-item.total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Add styles for success message */
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .success-message h2 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message .contact-email {
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav style="background: var(--surface); padding: 1rem 2rem; box-shadow: var(--shadow-sm);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 0;">
+            <a href="moverzhubai.html" style="text-decoration: none; color: var(--text); font-weight: 600; font-size: 1.25rem;">
+                Moverzhub.AI
+            </a>
+            <div style="display: flex; gap: 2rem;">
+                <a href="moverzhubai.html" style="text-decoration: none; color: var(--text-light);">Home</a>
+                <a href="AboutUs.html" style="text-decoration: none; color: var(--text-light);">About Us</a>
+                <a href="ContactUs.html" style="text-decoration: none; color: var(--text-light);">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Plan Your Perfect Move</h1>
+            <p>We help you find the most reliable and affordable moving solutions</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-step active" onclick="goToStep(1)">
+                        <div class="step-circle">1</div>
+                        <div class="step-label">Service</div>
+                    </div>
+                    <div class="progress-step" onclick="goToStep(2)">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">Details</div>
+                    </div>
+                    <div class="progress-step" onclick="goToStep(3)">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Recommendation</div>
+                    </div>
+                    <div class="progress-step" onclick="goToStep(4)">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Contact</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step active" id="step1">
+                <div class="step-header">
+                    <h2 class="step-title">Tell Us About Your Move</h2>
+                    <p class="step-description">Help us understand your moving needs</p>
+                </div>
+
+                <div class="details-section" id="details-part1">
+                    <h3 class="section-title">Starting and end location zipcode</h3>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Starting Location ZIP Code</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="startingZip" 
+                                   maxlength="5" 
+                                   placeholder="Enter ZIP code"
+                                   pattern="\d{5}"
+                                   required>
+                            <small class="form-text">Enter 5-digit ZIP code</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">End Location ZIP Code</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="endingZip" 
+                                   maxlength="5" 
+                                   placeholder="Enter ZIP code"
+                                   pattern="\d{5}"
+                                   required>
+                            <small class="form-text">Enter 5-digit ZIP code</small>
+                        </div>
+                    </div>
+
+                    <div class="distance-result" id="distanceResult" style="display: none;">
+                        <h4>Estimated Distance</h4>
+                        <div class="value" id="distanceValue"></div>
+                        <div class="note">Based on ZIP code to ZIP code calculation</div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="calculateDistance()">Calculate Distance</button>
+                        <button class="btn btn-primary" onclick="nextStep()" style="display: none;" id="continueBtn">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Move Details -->
+            <div class="step" id="step2">
+                <div class="step-header">
+                    <h2 class="step-title">Tell Us About Your Move</h2>
+                    <p class="step-description">Help us understand your moving needs</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What type of residence are you moving from?</label>
+                    <select class="form-control" id="residenceType" required>
+                        <option value="">Select Residence Type</option>
+                        <option value="studio">Studio/1-Bedroom Apartment</option>
+                        <option value="2bed">2-Bedroom Apartment</option>
+                        <option value="3bed">3-Bedroom House</option>
+                        <option value="4bed">4+ Bedroom House</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">When do you need to move?</label>
+                    <input type="date" class="form-control" id="moveDate" required>
+                    <small class="form-text">Select your preferred moving date</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Do you need packing services?</label>
+                    <select class="form-control" id="packingService" required>
+                        <option value="">Select Packing Option</option>
+                        <option value="full">Full Packing Service</option>
+                        <option value="partial">Partial Packing (Fragile Items Only)</option>
+                        <option value="none">No Packing Needed</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What floor is your current residence on?</label>
+                    <select class="form-control" id="currentFloor" required>
+                        <option value="">Select Floor Level</option>
+                        <option value="ground">Ground Floor</option>
+                        <option value="1">1st Floor</option>
+                        <option value="2">2nd Floor</option>
+                        <option value="3">3rd Floor</option>
+                        <option value="4plus">4th Floor or Higher</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How far is the walk from where the moving truck can park to your current home's entrance?</label>
+                    <select class="form-control" id="currentParkingDistance" required>
+                        <option value="">Select Distance</option>
+                        <option value="close">Less than 20 feet</option>
+                        <option value="medium">20-50 feet</option>
+                        <option value="far">50-100 feet</option>
+                        <option value="very-far">More than 100 feet</option>
+                    </select>
+                    <small class="form-text">This helps us determine if we need additional equipment or crew members for loading</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What floor are you moving to?</label>
+                    <select class="form-control" id="destinationFloor" required>
+                        <option value="">Select Floor Level</option>
+                        <option value="ground">Ground Floor</option>
+                        <option value="1">1st Floor</option>
+                        <option value="2">2nd Floor</option>
+                        <option value="3">3rd Floor</option>
+                        <option value="4plus">4th Floor or Higher</option>
+                    </select>
+                    <small class="form-text">This helps us estimate the time and effort needed at the destination</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How far is the walk from where the moving truck can park to your new home's entrance?</label>
+                    <select class="form-control" id="parkingDistance" required>
+                        <option value="">Select Distance</option>
+                        <option value="close">Less than 20 feet</option>
+                        <option value="medium">20-50 feet</option>
+                        <option value="far">50-100 feet</option>
+                        <option value="very-far">More than 100 feet</option>
+                    </select>
+                    <small class="form-text">This helps us determine if we need additional equipment or crew members</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Do you have any of these special items?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="specialItems" value="piano"> Piano
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="specialItems" value="safe"> Safe
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="specialItems" value="artwork"> Artwork
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="specialItems" value="antiques"> Antiques
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="specialItems" value="pool_table"> Pool Table
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What is your preferred time window for the move?</label>
+                    <select class="form-control" id="timePreference" required>
+                        <option value="">Select Time Preference</option>
+                        <option value="morning">Morning (8AM - 12PM)</option>
+                        <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                        <option value="evening">Evening (4PM - 8PM)</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Any parking or access restrictions we should know about?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="restrictions" value="permit"> Parking Permit Required
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="restrictions" value="elevator"> Elevator Reservation Needed
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="restrictions" value="stairs"> Stairs Only
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="restrictions" value="narrow"> Narrow Access/Hallways
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="restrictions" value="hoa"> HOA Restrictions
+                        </label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="previousStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Recommendations -->
+            <div class="step" id="step3">
+                <div class="step-header">
+                    <h2 class="step-title">Your Moving Recommendations</h2>
+                    <p class="step-description">Based on your move details, here's what we recommend</p>
+                </div>
+
+                <div class="recommendation-sections">
+                    <div class="recommendation-section">
+                        <h3 class="section-title">Price Estimate</h3>
+                        <div id="priceEstimate"></div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="previousStep()">Back</button>
+                    <button class="btn btn-primary" onclick="submitForm()">Book Now</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Customer Information -->
+            <div class="step" id="step4">
+                <div class="step-header">
+                    <h2 class="step-title">Your Contact Information</h2>
+                    <p class="step-description">Please provide your details to complete the booking</p>
+                </div>
+
+                <form action="https://formsubmit.co/contact@yourlocalmoverz.com" method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Move Details</label>
+                        <textarea name="move_details" class="form-control" id="moveDetails" rows="3" readonly></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" onclick="previousStep()">Back</button>
+                        <button type="submit" class="btn btn-primary" onclick="prepareMoveDetails()">Submit Booking</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--surface); padding: 3rem 0; margin-top: 4rem; border-top: 1px solid var(--border);">
+        <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Moverzhub.AI</h3>
+                <p style="color: var(--text-light);">Intelligent Moving Solutions</p>
+            </div>
+            <div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><a href="moverzhubai.html" style="text-decoration: none; color: var(--text-light);">Home</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="AboutUs.html" style="text-decoration: none; color: var(--text-light);">About Us</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="ContactUs.html" style="text-decoration: none; color: var(--text-light);">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Contact Us</h3>
+                <p style="color: var(--text-light);">Phone: (866) 517-6369</p>
+                <p style="color: var(--text-light);">Email: contact@yourlocalmoverz.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ZIP code coordinates database
+        const zipCoordinates = {
+            // Kansas City Metro Area (Both KS and MO)
+            '64101': [39.1047, -94.5847], // Kansas City, MO (Downtown)
+            '64102': [39.1080, -94.5971], // Kansas City, MO (West Downtown)
+            '64105': [39.1075, -94.5814], // Kansas City, MO (Financial District)
+            '64106': [39.1133, -94.5729], // Kansas City, MO (River Market)
+            '64108': [39.0914, -94.5830], // Kansas City, MO (Crossroads)
+            '64111': [39.0520, -94.5959], // Kansas City, MO (Plaza Area)
+            '64112': [39.0403, -94.5935], // Kansas City, MO (Country Club Plaza)
+            '66101': [39.1168, -94.6274], // Kansas City, KS
+            '66102': [39.1241, -94.6669], // Kansas City, KS
+            '66103': [39.0531, -94.6388], // Kansas City, KS
+            '66104': [39.1307, -94.6669], // Kansas City, KS
+            '66105': [39.0900, -94.6547], // Kansas City, KS
+            '66106': [39.0823, -94.6877], // Kansas City, KS
+            '66112': [39.1485, -94.6877], // Kansas City, KS
+
+            // Other Major Missouri Cities
+            '63101': [38.6278, -90.1920], // St. Louis Downtown
+            '63102': [38.6239, -90.1847], // St. Louis Arch Area
+            '63103': [38.6356, -90.2185], // St. Louis Midtown
+            '63104': [38.6067, -90.2185], // St. Louis Soulard
+            '65101': [38.5767, -92.1735], // Jefferson City
+            '65102': [38.5767, -92.1735], // Jefferson City
+            '65109': [38.5492, -92.2088], // Jefferson City
+            '65201': [38.9517, -92.3341], // Columbia
+            '65202': [39.0340, -92.3237], // Columbia
+            '65203': [38.9169, -92.3509], // Columbia
+            '64801': [37.0842, -94.5135], // Joplin
+            '64804': [37.0403, -94.5135], // Joplin
+            '65806': [37.2090, -93.2920], // Springfield
+            '65807': [37.1834, -93.3196], // Springfield
+            '65810': [37.1476, -93.2920], // Springfield
+
+            // Major Kansas Cities
+            '66601': [39.0473, -95.6752], // Topeka
+            '66603': [39.0473, -95.6752], // Topeka
+            '66604': [39.0684, -95.7171], // Topeka
+            '66605': [39.0169, -95.6541], // Topeka
+            '67201': [37.6922, -97.3375], // Wichita
+            '67202': [37.6889, -97.3375], // Wichita Downtown
+            '67203': [37.7097, -97.3959], // Wichita West
+            '67204': [37.7531, -97.3375], // Wichita North
+            '67212': [37.6922, -97.4544], // Wichita West
+            '66044': [38.9717, -95.2353], // Lawrence
+            '66046': [38.9582, -95.2624], // Lawrence
+            '66049': [38.9847, -95.2624], // Lawrence
+            '67401': [38.8403, -97.6074], // Salina
+            '67402': [38.8403, -97.6074], // Salina
+            '66441': [39.0275, -96.8314], // Manhattan
+            '66502': [39.1836, -96.5717], // Manhattan
+            '66503': [39.2150, -96.5926], // Manhattan
+
+            // Suburban Areas
+            '64014': [39.0169, -94.2813], // Blue Springs, MO
+            '64015': [39.0169, -94.2813], // Blue Springs, MO
+            '64055': [39.0911, -94.3516], // Independence, MO
+            '64056': [39.0911, -94.3516], // Independence, MO
+            '64057': [39.0569, -94.3735], // Independence, MO
+            '64068': [39.2469, -94.4138], // Liberty, MO
+            '64081': [38.9169, -94.3735], // Lee's Summit, MO
+            '64082': [38.9169, -94.3735], // Lee's Summit, MO
+            '64086': [38.8917, -94.3735], // Lee's Summit, MO
+            '66061': [38.8814, -94.8193], // Olathe, KS
+            '66062': [38.8814, -94.8193], // Olathe, KS
+            '66202': [39.0236, -94.6547], // Overland Park, KS
+            '66204': [39.0236, -94.6547], // Overland Park, KS
+            '66210': [38.9283, -94.6986], // Overland Park, KS
+            '66212': [38.9283, -94.6986], // Overland Park, KS
+            '66213': [38.9283, -94.6986], // Overland Park, KS
+            '66215': [38.9283, -94.6986], // Overland Park, KS
+            '66216': [39.0236, -94.7863], // Shawnee, KS
+            '66217': [38.9622, -94.7863], // Shawnee, KS
+            '66219': [38.9622, -94.7863]  // Shawnee, KS
+        };
+
+        function validateZipCode(zipInput) {
+            const zipRegex = /^\d{5}$/;
+            return zipRegex.test(zipInput.value);
+        }
+
+        function calculateDistance() {
+            const startZip = document.getElementById('startingZip');
+            const endZip = document.getElementById('endingZip');
+            
+            if (!validateZipCode(startZip) || !validateZipCode(endZip)) {
+                alert('Please enter valid 5-digit ZIP codes');
+                return;
+            }
+
+            // Show loading state
+            const distanceResult = document.getElementById('distanceResult');
+            const continueBtn = document.getElementById('continueBtn');
+            const distanceValue = document.getElementById('distanceValue');
+            
+            distanceResult.style.display = 'block';
+
+            // Get coordinates for both ZIP codes
+            const startCoords = zipCoordinates[startZip.value];
+            const endCoords = zipCoordinates[endZip.value];
+
+            if (!startCoords || !endCoords) {
+                distanceValue.innerHTML = `
+                    <div style="color: #dc2626; font-size: 0.9rem;">
+                        Sorry, one or both ZIP codes are not in our database yet. Please try different ZIP codes or contact support.
+                    </div>
+                `;
+                continueBtn.style.display = 'none';
+                return;
+            }
+
+            // Calculate straight-line distance
+            const straightLineDistance = calculateHaversineDistance(startCoords[0], startCoords[1], endCoords[0], endCoords[1]);
+            
+            // Estimate driving distance (roughly 1.3 times the straight-line distance)
+            const estimatedDrivingDistance = Math.round(straightLineDistance * 1.3);
+            
+            // Display the results
+            distanceValue.innerHTML = `
+                <div style="font-size: 1.5rem; color: var(--primary); font-weight: 600;">
+                    ${estimatedDrivingDistance} miles
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">
+                    Estimated driving distance
+                </div>
+            `;
+            
+            // Show the continue button
+            continueBtn.style.display = 'block';
+            
+            // Update price estimates based on distance
+            updatePriceEstimates(estimatedDrivingDistance);
+        }
+
+        function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 3959; // Earth's radius in miles
+            const dLat = toRadians(lat2 - lat1);
+            const dLon = toRadians(lon2 - lon1);
+            
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            
+            return distance;
+        }
+
+        function toRadians(degrees) {
+            return degrees * (Math.PI/180);
+        }
+
+        function estimateMovingTime(distance) {
+            // Average moving truck speed: 60 mph
+            // Add time for loading/unloading and breaks
+            const drivingHours = distance / 60;
+            const loadingHours = 2; // Average loading time
+            const unloadingHours = 1.5; // Average unloading time
+            const totalHours = drivingHours + loadingHours + unloadingHours;
+            
+            if (totalHours < 24) {
+                return `${Math.ceil(totalHours)} hours`;
+            } else {
+                const days = Math.floor(totalHours / 24);
+                const remainingHours = Math.ceil(totalHours % 24);
+                return `${days} day${days > 1 ? 's' : ''} ${remainingHours > 0 ? `and ${remainingHours} hours` : ''}`;
+            }
+        }
+
+        function updatePriceEstimates(distance) {
+            // Base rate per mile
+            const baseRate = 2.50;
+            
+            // Calculate distance-based costs
+            const distanceCost = distance * baseRate;
+            
+            // Store for later use in final calculations
+            window.distanceCost = distanceCost;
+        }
+
+        function showDetailsPart(partNumber) {
+            // Hide all detail parts
+            const detailParts = document.querySelectorAll('[id^="details-part"]');
+            detailParts.forEach(part => part.style.display = 'none');
+            
+            // Show the requested part
+            const targetPart = document.getElementById(`details-part${partNumber}`);
+            if (targetPart) {
+                targetPart.style.display = 'block';
+            }
+        }
+
+        function goToStep(stepNumber) {
+            // Hide all steps
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+            
+            // Show the requested step
+            const targetStep = document.getElementById(`step${stepNumber}`);
+            if (targetStep) {
+                targetStep.classList.add('active');
+            }
+            
+            // Update progress bar
+            const progressSteps = document.querySelectorAll('.progress-step');
+            progressSteps.forEach((step, index) => {
+                if (index + 1 < stepNumber) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index + 1 === stepNumber) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        function nextStep() {
+            const currentStep = document.querySelector('.step.active');
+            const currentStepNumber = parseInt(currentStep.id.replace('step', ''));
+            
+            // If moving to step 3, calculate move details
+            if (currentStepNumber === 2) {
+                calculateMoveDetails();
+            }
+            
+            goToStep(currentStepNumber + 1);
+        }
+
+        function previousStep() {
+            const currentStep = document.querySelector('.step.active');
+            const currentStepNumber = parseInt(currentStep.id.replace('step', ''));
+            goToStep(currentStepNumber - 1);
+        }
+
+        function calculateMoveDetails() {
+            // Get all the necessary input values
+            const residenceType = document.getElementById('residenceType').value;
+            const currentFloor = document.getElementById('currentFloor').value;
+            const destinationFloor = document.getElementById('destinationFloor').value;
+            const currentParking = document.getElementById('currentParkingDistance').value;
+            const destParking = document.getElementById('parkingDistance').value;
+            const specialItems = document.querySelectorAll('input[name="specialItems"]:checked');
+            const packingService = document.getElementById('packingService').value;
+
+            // Calculate Truck Size and Base Rate
+            let truckSize = '16ft';
+            let truckRate = 0; // Base rate per hour for 16ft truck
+            if (residenceType === '3bed' || residenceType === '4bed' || specialItems.length > 2) {
+                truckSize = '26ft';
+                truckRate = 0; // Base rate per hour for 26ft truck
+            }
+
+            // Calculate Team Size and Labor Rate
+            let teamSize = 2; // Default minimum team size
+            let laborRate = 75; // Base rate per hour per mover
+            
+            // Convert floor values to numbers for comparison
+            const currentFloorNum = currentFloor === 'ground' ? 0 : parseInt(currentFloor) || 4;
+            const destFloorNum = destinationFloor === 'ground' ? 0 : parseInt(destinationFloor) || 4;
+            const maxFloor = Math.max(currentFloorNum, destFloorNum);
+            
+            // Check for conditions that require more movers
+            if (residenceType === '3bed' || residenceType === '4bed') {
+                teamSize = 3;
+            }
+            if (maxFloor > 2 || 
+                currentParking === 'far' || currentParking === 'very-far' ||
+                destParking === 'far' || destParking === 'very-far' ||
+                specialItems.length > 1) {
+                teamSize = 4;
+            }
+
+            // Calculate Time Estimate
+            let baseHours = 2; // Minimum time
+            
+            // Add time based on residence size
+            const sizeMultiplier = {
+                'studio': 1,
+                '2bed': 1.2,
+                '3bed': 1.5,
+                '4bed': 2
+            };
+            baseHours *= sizeMultiplier[residenceType] || 1;
+
+            // Add time for floors
+            baseHours += (currentFloorNum * 0.5) + (destFloorNum * 0.5);
+
+            // Add time for parking distance
+            const parkingTimeAdd = {
+                'close': 0,
+                'medium': 0.25,
+                'far': 0.5,
+                'very-far': 1.0
+            };
+            baseHours += (parkingTimeAdd[currentParking] || 0) + (parkingTimeAdd[destParking] || 0);
+
+            // Add time for special items
+            baseHours += specialItems.length * 0.5;
+
+            // Add time for packing service
+            if (packingService === 'full') {
+                baseHours *= 2;
+            } else if (packingService === 'partial') {
+                baseHours *= 1.5;
+            }
+
+            // Calculate time range
+            const timeRangeStart = Math.max(2, Math.floor(baseHours));
+            const timeRangeEnd = Math.ceil(baseHours + 1);
+
+            // Calculate Costs
+            const hourlyRate = truckRate + (laborRate * teamSize);
+            const minCost = hourlyRate * timeRangeStart;
+            const maxCost = hourlyRate * timeRangeEnd;
+
+            // Add fees for special items
+            const specialItemFees = {
+                'piano': 300,
+                'safe': 300,
+                'artwork': 150,
+                'antiques': 200,
+                'pool_table': 300
+            };
+            const specialItemsCost = Array.from(specialItems).reduce((sum, item) => sum + (specialItemFees[item.value] || 0), 0);
+            
+            // Calculate total cost range
+            const totalMinCost = minCost + specialItemsCost;
+            const totalMaxCost = maxCost + specialItemsCost;
+
+            // Update the price estimate display
+            const priceEstimate = document.getElementById('priceEstimate');
+            priceEstimate.innerHTML = `
+                <div class="move-details">
+                    <h3 class="section-title">Move Details & Estimate</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Truck Size:</span>
+                            <span class="detail-value">${truckSize} Box Truck</span>
+                            <small class="detail-note">$${truckRate}/hour</small>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Team Size:</span>
+                            <span class="detail-value">${teamSize} Professional Movers</span>
+                            <small class="detail-note">$${laborRate}/hour per mover</small>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Estimated Time:</span>
+                            <span class="detail-value">${timeRangeStart}-${timeRangeEnd} Hours</span>
+                            <small class="detail-note">Based on size, access, and services</small>
+                        </div>
+                    </div>
+
+                    <div class="cost-breakdown">
+                        <h4>Cost Breakdown</h4>
+                        <div class="cost-item">
+                            <span>Labor & Truck (${timeRangeStart}-${timeRangeEnd} hrs):</span>
+                            <span>$${Math.round(minCost)}-$${Math.round(maxCost)}</span>
+                        </div>
+                        ${specialItemsCost > 0 ? `
+                            <div class="cost-item">
+                                <span>Special Items Fee:</span>
+                                <span>$${specialItemsCost}</span>
+                            </div>
+                        ` : ''}
+                        <div class="cost-item total">
+                            <span>Estimated Total Range:</span>
+                            <span>$${Math.round(totalMinCost)}-$${Math.round(totalMaxCost)}</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="font-size: 0.875rem; color: var(--text-light); margin-top: 1rem;">
+                    * These estimates are based on typical moving conditions. Final price may vary based on actual time and conditions.
+                </div>
+            `;
+        }
+
+        // Function to handle the Book Now button
+        function submitForm() {
+            goToStep(4);
+        }
+
+        // Function to handle customer information submission
+        function submitCustomerInfo(event) {
+            event.preventDefault();
+
+            // Gather all move details
+            const moveDetails = {
+                residenceType: document.getElementById('residenceType').value,
+                startingZip: document.getElementById('startingZip').value,
+                endingZip: document.getElementById('endingZip').value,
+                moveDate: document.getElementById('moveDate').value,
+                truckSize: document.querySelector('.detail-value').textContent,
+                teamSize: document.querySelectorAll('.detail-value')[1].textContent,
+                estimatedTime: document.querySelectorAll('.detail-value')[2].textContent,
+                estimatedCost: document.querySelector('.cost-item.total').lastElementChild.textContent,
+                customerName: document.getElementById('customerName').value,
+                customerEmail: document.getElementById('customerEmail').value,
+                customerPhone: document.getElementById('customerPhone').value,
+                contactTime: document.getElementById('contactTime').value,
+                customerNotes: document.getElementById('customerNotes').value
+            };
+
+            // Create email content
+            const emailContent = `
+                New Move Request
+
+                Customer Information:
+                Name: ${moveDetails.customerName}
+                Email: ${moveDetails.customerEmail}
+                Phone: ${moveDetails.customerPhone}
+                Preferred Contact Time: ${moveDetails.contactTime}
+
+                Move Details:
+                From: ${moveDetails.startingZip}
+                To: ${moveDetails.endingZip}
+                Residence Type: ${moveDetails.residenceType}
+                Requested Date: ${moveDetails.moveDate}
+                
+                Service Requirements:
+                Truck Size: ${moveDetails.truckSize}
+                Team Size: ${moveDetails.teamSize}
+                Estimated Time: ${moveDetails.estimatedTime}
+                Estimated Cost Range: ${moveDetails.estimatedCost}
+
+                Additional Notes:
+                ${moveDetails.customerNotes}
+            `;
+
+            // Send email using mailto link
+            const mailtoLink = `mailto:contact@yourlocalmoverz.com?subject=New Move Request - ${moveDetails.customerName}&body=${encodeURIComponent(emailContent)}`;
+            window.location.href = mailtoLink;
+
+            // Show success message
+            const successHtml = `
+                <div class="step" id="success">
+                    <div class="step-header">
+                        <h2 class="step-title">Booking Submitted Successfully!</h2>
+                        <p class="step-description">Thank you for choosing Your Local Moverz. We'll contact you shortly to confirm your move details.</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p>A copy of your booking details has been sent to your email.</p>
+                        <p>If you have any questions, please contact us at:</p>
+                        <p style="color: var(--primary); font-size: 1.25rem; font-weight: 600; margin-top: 1rem;">
+                            contact@yourlocalmoverz.com
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.form-container').innerHTML = successHtml;
+        }
+
+        // Function to prepare form submission
+        function prepareFormSubmission(event) {
+            // Gather move details
+            const moveDetails = {
+                'Starting ZIP': document.getElementById('startingZip').value,
+                'Ending ZIP': document.getElementById('endingZip').value,
+                'Residence Type': document.getElementById('residenceType').value,
+                'Move Date': document.getElementById('moveDate').value,
+                'Truck Size': document.querySelector('.detail-value').textContent,
+                'Team Size': document.querySelectorAll('.detail-value')[1].textContent,
+                'Estimated Time': document.querySelectorAll('.detail-value')[2].textContent,
+                'Estimated Cost': document.querySelector('.cost-item.total').lastElementChild.textContent
+            };
+
+            // Convert move details to string
+            const moveDetailsString = Object.entries(moveDetails)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join('\n');
+
+            // Set the value of the hidden field
+            document.getElementById('moveDetailsField').value = moveDetailsString;
+        }
+
+        function prepareMoveDetails() {
+            const moveDetails = `
+Starting ZIP: ${document.getElementById('startingZip').value}
+Ending ZIP: ${document.getElementById('endingZip').value}
+Residence Type: ${document.getElementById('residenceType').value}
+Truck Size: ${document.querySelector('.detail-value').textContent}
+Team Size: ${document.querySelectorAll('.detail-value')[1].textContent}
+Estimated Time: ${document.querySelectorAll('.detail-value')[2].textContent}
+Estimated Cost: ${document.querySelector('.cost-item.total').lastElementChild.textContent}
+            `;
+            
+            document.getElementById('moveDetails').value = moveDetails;
+        }
+    </script>
+</body>
+</html>
